@@ -5,6 +5,7 @@ type Query {
 
 type Mutation {
     addTask(input: addTaskInput): Task    
+    removeTask(id:ID!): Task
 }
 
 input addTaskInput {
@@ -15,6 +16,7 @@ input addTaskInput {
 
 
 type Task {
+    id: ID!
     title: String
     description: String
     completed: Boolean

@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Types } from "mongoose";
 
 export interface ITask extends Document {
   title: string;
@@ -13,7 +13,7 @@ const taskSchema = new Schema<ITask>({
   },
   description: {
     type: String,
-    required: true,
+    required: false,
   },
   completed: {
     type: Boolean,
