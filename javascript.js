@@ -2,7 +2,9 @@
 
 // A simple function
 function greet(name) {
-    return `Hi,${name}!`;
+
+    return `Hellow World,${name}!`;
+>>>>>>> new_branch
 }
 
 // I dont want this anymore
