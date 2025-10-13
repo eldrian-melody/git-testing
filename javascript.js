@@ -2,7 +2,7 @@
 
 // A simple function
 function greet(name) {
- return `Hellow World,${name}!`;
+ return `Hi,${name}!`;
 }
 
 console.log(greet("Melody"));
