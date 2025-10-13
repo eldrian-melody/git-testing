@@ -2,7 +2,11 @@
 
 // A simple function
 function greet(name) {
+<<<<<<< HEAD
  return `Hi,${name}!`;
+=======
+ return `Hellow Worldooo,${name}!`;
+>>>>>>> new_branch
 }
 
 console.log(greet("Melody"));
