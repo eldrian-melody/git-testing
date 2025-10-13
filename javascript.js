@@ -2,13 +2,10 @@
 
 // A simple function
 function greet(name) {
-
-    return `Hellow World,${name}!`;
->>>>>>> new_branch
+ return `Hellow World,${name}!`;
 }
 
-// I dont want this anymore
-
+console.log(greet("Melody"));
 
 // new changes 
 console.log('new changes');
