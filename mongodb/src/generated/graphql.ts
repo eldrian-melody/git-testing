@@ -15,6 +15,16 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  addTask?: Maybe<Task>;
+};
+
+
+export type MutationAddTaskArgs = {
+  input?: InputMaybe<AddTaskInput>;
+};
+
 export type Query = {
   __typename?: 'Query';
   tasks?: Maybe<Array<Task>>;
@@ -25,6 +35,12 @@ export type Task = {
   completed?: Maybe<Scalars['Boolean']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
+};
+
+export type AddTaskInput = {
+  completed: Scalars['Boolean']['input'];
+  description?: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
 
@@ -101,17 +117,25 @@ export type DirectiveResolverFn<TResult = Record<PropertyKey, never>, TParent = 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Mutation: ResolverTypeWrapper<Record<PropertyKey, never>>;
   Query: ResolverTypeWrapper<Record<PropertyKey, never>>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   Task: ResolverTypeWrapper<Task>;
+  addTaskInput: AddTaskInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
+  Mutation: Record<PropertyKey, never>;
   Query: Record<PropertyKey, never>;
   String: Scalars['String']['output'];
   Task: Task;
+  addTaskInput: AddTaskInput;
+};
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addTask?: Resolver<Maybe<ResolversTypes['Task']>, ParentType, ContextType, Partial<MutationAddTaskArgs>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
@@ -125,6 +149,7 @@ export type TaskResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type Resolvers<ContextType = any> = {
+  Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Task?: TaskResolvers<ContextType>;
 };

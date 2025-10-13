@@ -3,11 +3,22 @@ type Query {
     tasks: [Task!]
 }
 
+type Mutation {
+    addTask(input: addTaskInput): Task    
+}
+
+input addTaskInput {
+    title: String!
+    description: String
+    completed: Boolean!
+}
+
 
 type Task {
     title: String
     description: String
     completed: Boolean
 }
+
 
 
