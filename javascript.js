@@ -2,7 +2,7 @@
 
 // A simple function
 function greet(name) {
-    return `Hellow,${name}!`;
+    return `Hi,${name}!`;
 }
 
 // I dont want this anymore
