@@ -5,8 +5,7 @@ function greet(name) {
     return `Hello, ${name}!`;
 }
 
-// Run the function
-console.log(greet("World"));
+// I dont want this anymore
 
 
 // new changes 
