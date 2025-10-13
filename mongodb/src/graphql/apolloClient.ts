@@ -1,7 +1,5 @@
 import { ApolloServer } from "@apollo/server";
 import type { ApolloServer as ApolloServerType } from "@apollo/server";
-import { resolvers } from "./resolvers";
-import { readFile } from "node:fs/promises";
 import { expressMiddleware } from "@as-integrations/express5";
 import { RequestHandler } from "express";
 import mergedSchema from "./merged.schema";
@@ -13,8 +11,6 @@ interface ApolloServerSetup {
 }
 
 export const createApolloServer = async (): Promise<ApolloServerSetup> => {
-  const typeDefs = await readFile("./src/graphql/task.graphql", "utf8");
-
   const apolloServer = new ApolloServer({
     typeDefs: mergedSchema,
     resolvers: mergedResolvers,
