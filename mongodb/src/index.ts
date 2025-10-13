@@ -1,12 +1,29 @@
-import express from 'express';
+import express from "express";
+import dotenv from "dotenv";
+import connectDB from "./db/connection";
+import cors from "cors";
+import { createApolloServer } from "./graphql/apolloClient";
 
-const app = express();
+dotenv.config();
+
 const PORT = process.env.PORT || 7000;
 
-app.get('/', (req, res) => {
-    res.send('Hello, World!');
+const app = express();
+
+app.use(cors(), express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello, World!");
 });
 
-app.listen(PORT, () => {
+connectDB();
+
+const startServer = async () => {
+  const { apolloMiddleware } = await createApolloServer();
+  app.use("/graphql", apolloMiddleware);
+  app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
-});
+  });
+};
+
+startServer();
