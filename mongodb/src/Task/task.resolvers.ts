@@ -1,11 +1,15 @@
-export const resolvers = {
+import { Resolvers } from "../generated/graphql";
+
+const taskResolvers: Resolvers = {
   Query: {
-    task: () => {
-      return {
+    tasks: () => [
+      {
         title: "Sample Task",
-        description: "This is a sample task description.",
+        description: "This is a sample task description",
         completed: false,
-      };
-    },
+      },
+    ],
   },
 };
+
+export default taskResolvers;
