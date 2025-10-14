@@ -1,9 +1,18 @@
 import { Resolvers } from "../generated/graphql";
-import { ITask, Task } from "./task.model";
+import { Task } from "./task.model";
+import { Types } from "mongoose";
 
 const taskResolvers: Resolvers = {
   Query: {
-    tasks: async () => Task.find(),
+    tasks: async () => {
+      const tasks = await Task.find();
+      return tasks.map((task) => ({
+        id: (task._id as Types.ObjectId).toString(),
+        title: task.title,
+        description: task.description,
+        completed: task.completed,
+      }));
+    },
   },
 
   Mutation: {
@@ -20,7 +29,12 @@ const taskResolvers: Resolvers = {
 
         await newTask.save();
 
-        return newTask;
+        return {
+          id: (newTask._id as Types.ObjectId).toString(),
+          title: newTask.title,
+          description: newTask.description,
+          completed: newTask.completed,
+        };
       } catch (error) {
         console.error("Error adding task:", error);
         throw new Error("Failed to add task");
