@@ -8,6 +8,19 @@ const taskResolvers: Resolvers = {
   },
 
   Mutation: {
+    deleteTasks: async () => {
+      try {
+        const tasksToDelete = await Task.find();
+        if (!tasksToDelete.length) {
+          throw new Error("No tasks found to delete");
+        }
+
+        await Task.deleteMany();
+        return tasksToDelete;
+      } catch (error) {
+        throw new Error("Failed to delete tasks");
+      }
+    },
     addTask: async (_, { input }) => {
       try {
         if (!input) {
