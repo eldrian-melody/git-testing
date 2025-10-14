@@ -2,8 +2,9 @@ import mongoose, { Schema, Document, Types } from "mongoose";
 
 export interface ITask extends Document {
   title: string;
-  description: string;
+  description?: string;
   completed: boolean;
+  id: string;
 }
 
 const taskSchema = new Schema<ITask>({
