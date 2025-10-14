@@ -1,12 +1,22 @@
 
 type Query {
     tasks: [Task!]
+    task(id:ID!): Task
 }
 
 type Mutation {
     addTask(input: addTaskInput): Task    
     removeTask(id:ID!): Task
     deleteTasks: [Task!]
+    deleteTask(id:ID!): Task
+    updateTask(input: updateTaskInput): Task
+}
+
+input updateTaskInput {
+    title: String
+    description: String
+    completed: Boolean
+    id: ID!
 }
 
 input addTaskInput {

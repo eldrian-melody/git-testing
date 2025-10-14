@@ -19,8 +19,10 @@ export type Scalars = {
 export type Mutation = {
   __typename?: 'Mutation';
   addTask?: Maybe<Task>;
+  deleteTask?: Maybe<Task>;
   deleteTasks?: Maybe<Array<Task>>;
   removeTask?: Maybe<Task>;
+  updateTask?: Maybe<Task>;
 };
 
 
@@ -29,13 +31,29 @@ export type MutationAddTaskArgs = {
 };
 
 
+export type MutationDeleteTaskArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
 export type MutationRemoveTaskArgs = {
   id: Scalars['ID']['input'];
 };
 
+
+export type MutationUpdateTaskArgs = {
+  input?: InputMaybe<UpdateTaskInput>;
+};
+
 export type Query = {
   __typename?: 'Query';
+  task?: Maybe<Task>;
   tasks?: Maybe<Array<Task>>;
+};
+
+
+export type QueryTaskArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type Task = {
@@ -50,6 +68,13 @@ export type AddTaskInput = {
   completed: Scalars['Boolean']['input'];
   description?: InputMaybe<Scalars['String']['input']>;
   title: Scalars['String']['input'];
+};
+
+export type UpdateTaskInput = {
+  completed?: InputMaybe<Scalars['Boolean']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['ID']['input'];
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -132,6 +157,7 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']['output']>;
   Task: ResolverTypeWrapper<Task>;
   addTaskInput: AddTaskInput;
+  updateTaskInput: UpdateTaskInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -143,15 +169,19 @@ export type ResolversParentTypes = {
   String: Scalars['String']['output'];
   Task: Task;
   addTaskInput: AddTaskInput;
+  updateTaskInput: UpdateTaskInput;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addTask?: Resolver<Maybe<ResolversTypes['Task']>, ParentType, ContextType, Partial<MutationAddTaskArgs>>;
+  deleteTask?: Resolver<Maybe<ResolversTypes['Task']>, ParentType, ContextType, RequireFields<MutationDeleteTaskArgs, 'id'>>;
   deleteTasks?: Resolver<Maybe<Array<ResolversTypes['Task']>>, ParentType, ContextType>;
   removeTask?: Resolver<Maybe<ResolversTypes['Task']>, ParentType, ContextType, RequireFields<MutationRemoveTaskArgs, 'id'>>;
+  updateTask?: Resolver<Maybe<ResolversTypes['Task']>, ParentType, ContextType, Partial<MutationUpdateTaskArgs>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  task?: Resolver<Maybe<ResolversTypes['Task']>, ParentType, ContextType, RequireFields<QueryTaskArgs, 'id'>>;
   tasks?: Resolver<Maybe<Array<ResolversTypes['Task']>>, ParentType, ContextType>;
 };
 
